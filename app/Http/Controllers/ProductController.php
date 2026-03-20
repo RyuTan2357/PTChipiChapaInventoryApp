@@ -23,7 +23,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        return view('createitem');
     }
 
     /**
@@ -32,14 +32,16 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'category_name' => 'required|exists:categories,name',
+            'category_name' => 'required|string',
             'name' => 'required|string|min:5',
             'price' => 'required|integer',
             'stock' => 'required|integer',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,gif'
         ]);
 
-        $category = Category::firstorCreate(['name' => $validated['category_name']]);
+        $category = Category::firstorCreate([
+            'name' => trim(strtolower($validated['category_name']))
+        ]);
 
         if ($request->hasFile("image")) {
             $now = now()->format("Y-m-d_H.i.s");
