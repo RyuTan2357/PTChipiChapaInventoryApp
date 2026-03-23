@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('index', compact('products'));
+        return view('indexitem')->with('products', $products);
     }
 
     /**
@@ -58,7 +58,7 @@ class ProductController extends Controller
             'image' => $validated['image'] ?? null
         ]);
 
-        return redirect()->route('products.index')->with('success', 'Product created successfully.');
+        return redirect()->route('home')->with('success', 'Product created successfully.');
     }
 
     /**
