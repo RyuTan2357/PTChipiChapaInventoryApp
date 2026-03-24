@@ -18,6 +18,12 @@
                 <h5 class="card-title">{{ $product->name }}</h5>
                 <p class="card-text">Price: Rp{{ number_format($product->price, 2) }}</p>
                 <p class="card-text">Stock: {{ $product->stock }}</p>
+                <a href="/edit/{{ $product->id }}" class="btn btn-primary">Edit</a>
+                <form action="/delete/{{ $product->id }}" method="POST" style="display: inline-block;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
             </div>
         </div>
     @empty

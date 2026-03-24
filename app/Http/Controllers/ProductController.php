@@ -75,7 +75,7 @@ class ProductController extends Controller
     public function edit(string $id)
     {
         $product = Product::findOrFail($id);
-        return view('products.edit', compact('product'));
+        return view('edititem')->with('product', $product);
     }
 
     /**
@@ -84,10 +84,10 @@ class ProductController extends Controller
     public function update(Request $request, string $id)
     {
         $validated = $request->validate([
-            'category_name' => 'sometimes|exists:categories,name',
-            'name' => 'sometimes|string|min:5',
-            'price' => 'sometimes|integer',
-            'stock' => 'sometimes|integer',
+            'category_name' => 'required|exists:categories,name',
+            'name' => 'required|string|min:5',
+            'price' => 'required|integer',
+            'stock' => 'required|integer',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,gif'
         ]);
 
@@ -107,7 +107,7 @@ class ProductController extends Controller
 
         $product = Product::findOrFail($id);
         $product->update($validated);
-        return redirect()->route('products.index')->with('success', 'Product updated successfully.');
+        return redirect()->route('home')->with('success', 'Product updated successfully.');
     }
 
     /**
@@ -116,8 +116,8 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         $product = Product::findOrFail($id);
-        Storage::disk("public")->delete("images/". $product->image);
+        Storage::disk("public")->delete("storage/images/". $product->image);
         $product->delete();
-        return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
+        return redirect()->route('home')->with('success', 'Product deleted successfully.');
     }
 }
