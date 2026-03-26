@@ -24,6 +24,7 @@
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
+                <a href="/add/{{ $product->id }}" method="PUT" class></a>
             </div>
         </div>
     @empty
