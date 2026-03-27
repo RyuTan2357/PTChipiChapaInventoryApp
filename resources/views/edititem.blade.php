@@ -3,6 +3,9 @@
 @section('title', 'Edit Item')
 
 @section('content')
+    @include('layouts.navbar')
+    @include('layouts.usercredentials')
+
     <h1 class="fw-bold text-center">Edit Item</h1>
 
     @if ($errors->any())
@@ -28,7 +31,7 @@
         </div>
         <div class="mb-3">
             <label for="price" class="form-label">Item Price:</label>
-            <input type="number" name="price" id="price" class="form-control" value="{{ old('price', $product->price) }}">
+            <input type="number" step="0.01" name="price" id="price" class="form-control" value="{{ old('price', $product->price) }}">
         </div>
         <div class="mb-3">
             <label for="stock" class="form-label">Item Stock:</label>

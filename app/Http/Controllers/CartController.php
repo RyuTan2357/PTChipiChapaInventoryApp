@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cart;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -12,7 +13,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        $carts = Cart::with('product')->where('user_id', auth()->id())->get();
+        $carts = Cart::with('product')->where('user_id', Auth::id())->get();
         return view('indexcart')->with('carts', $carts);
     }
 

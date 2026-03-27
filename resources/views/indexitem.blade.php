@@ -4,6 +4,7 @@
 
 @section('content')
     @include('layouts.navbar')
+    @include('layouts.usercredentials')
 
     <div class="text-center">
         <h1 class="fw-bold">Welcome to ChipiChapa!</h1>

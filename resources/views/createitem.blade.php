@@ -3,17 +3,10 @@
 @section('title', 'Create New Item')
 
 @section('content')
-    <h1 class="fw-bold text-center">Create New Item</h1>
+    @include('layouts.navbar')
+    @include('layouts.usercredentials')
 
-    @if ($errors->any())
-    <div class="alert alert-danger">
-      <ul class="mb-0">
-        @foreach ($errors->all() as $error)
-          <li>{{ $error }}</li>
-        @endforeach
-      </ul>
-    </div>
-    @endif
+    <h1 class="fw-bold text-center">Create New Item</h1>
 
     <form action="/create" method="POST" enctype="multipart/form-data">
         @csrf
@@ -27,7 +20,7 @@
         </div>
         <div class="mb-3">
             <label for="price" class="form-label">Item Price:</label>
-            <input type="number" name="price" id="price" class="form-control">
+            <input type="number" step="0.01" name="price" id="price" class="form-control">
         </div>
         <div class="mb-3">
             <label for="stock" class="form-label">Item Stock:</label>
