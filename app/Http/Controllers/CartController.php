@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Cart;
 
-class InvoiceDetailsController extends Controller
+class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $InvoiceDetails = InvoiceDetails::all();
-        return view('indexInvoiceDetails')->with('InvoiceDetails', $InvoiceDetails);
+        $carts = Cart::with('product')->where('user_id', auth()->id())->get();
+        return view('indexcart')->with('carts', $carts);
     }
 
     /**
@@ -20,7 +21,7 @@ class InvoiceDetailsController extends Controller
      */
     public function create()
     {
-        return view('createInvoiceDetails');
+        //
     }
 
     /**
@@ -28,7 +29,7 @@ class InvoiceDetailsController extends Controller
      */
     public function store(Request $request)
     {
-        
+        //
     }
 
     /**
